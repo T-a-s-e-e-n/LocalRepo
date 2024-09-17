@@ -18,9 +18,26 @@ import { useAttributePreference } from "../common/util/preferences";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: "100%",
-    width: "76%",
+    height: "100vh",
+    width: "76vw",
     float: "right",
+    overflow: "hidden",
+    position: "relative",
+  },
+  div1: {
+    height: "50%",
+    width: "50%",
+    display: "flex",
+    flexDirection: "column",
+    position: "relative",
+  },
+  whole: {
+    height: "100%",
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    position: "absolute",
+    flexWrap: "wrap",
   },
   sidebar: {
     pointerEvents: "none",
@@ -60,27 +77,6 @@ const useStyles = makeStyles((theme) => ({
     pointerEvents: "auto",
     gridArea: "1 / 1",
     zIndex: 4,
-  },
-  div1: {
-    height: "50%",
-    width: "50%",
-    display: "flex",
-    flexDirection: "column",
-
-    justifyContent: "space-between",
-  },
-  whole: {
-    height: "100%",
-    width: "100%",
-    display: "flex",
-    flexWrap: "wrap",
-  },
-  draggableContainer: {
-    height: "50%",
-    width: "50%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
   },
 }));
 
@@ -157,6 +153,7 @@ const MainPage = () => {
             return (
               <div key={deviceId} className={classes.div1}>
                 <Draggable
+                  bounds="parent"
                   deviceName={deviceName}
                   onRemove={() => handleRemoveDevice(deviceId)}
                 />
@@ -166,13 +163,6 @@ const MainPage = () => {
         </div>
       )}
 
-      {/* {desktop && (
-        <MainMap
-          filteredPositions={filteredPositions}
-          selectedPosition={selectedPosition}
-          onEventsClick={onEventsClick}
-        />
-      )} */}
       <div className={classes.sidebar}>
         <Paper square elevation={3} className={classes.header}>
           <MainToolbar
